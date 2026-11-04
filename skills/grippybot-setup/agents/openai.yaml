@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grippy Bot — instalacja i diagnostyka"
+  short_description: "Uruchom panel Grippy Bot na Raspberry Pi 4"
+  default_prompt: "Użyj $grippybot-setup, aby pomóc mi uruchomić panel Grippy Bot na Raspberry Pi."

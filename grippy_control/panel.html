@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="pl">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>Grippy • Studio ruchu</title>
+  <style>
+    :root {
+      --bg: #f3f1eb;
+      --paper: #fffefa;
+      --ink: #232824;
+      --muted: #71776f;
+      --line: #deded3;
+      --orange: #ed8034;
+      --green: #32745c;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font:
+        15px system-ui,
+        sans-serif;
+    }
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+    button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper);
+      padding: 11px 14px;
+      color: var(--ink);
+    }
+    button:hover {
+      border-color: var(--orange);
+    }
+    button:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+    header {
+      padding: 25px 34px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    h1 {
+      font-size: 27px;
+      letter-spacing: -1px;
+      margin: 3px 0;
+    }
+    small,
+    .muted {
+      color: var(--muted);
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .pill {
+      border-radius: 20px;
+      padding: 8px 12px;
+      background: #e5e8df;
+      font-size: 12px;
+    }
+    .stop {
+      background: #a5362d;
+      color: white;
+      border: 0;
+      font-weight: 750;
+    }
+    .primary {
+      background: var(--ink);
+      color: white;
+      border: 0;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 18px;
+      padding: 0 34px 25px;
+      max-width: 1600px;
+      margin: auto;
+    }
+    .stage,
+    .sidebar {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .stage-head {
+      padding: 20px 23px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .stage svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      touch-action: none;
+      user-select: none;
+      max-height: 73vh;
+      min-height: 400px;
+    }
+    .stage-foot {
+      padding: 16px 23px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .sidebar {
+      padding: 22px;
+    }
+    .sidebar h2 {
+      font-size: 19px;
+      margin: 0 0 7px;
+    }
+    .joint {
+      padding: 12px 9px;
+      border: 1px solid transparent;
+      border-bottom-color: var(--line);
+      border-radius: 9px;
+      cursor: pointer;
+    }
+    .joint.selected {
+      background: #fff0e0;
+      border-color: #e9bb92;
+    }
+    .joint-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .joint small {
+      font-size: 11px;
+    }
+    .value {
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+    }
+    .section {
+      padding-top: 20px;
+      margin-top: 17px;
+      border-top: 1px solid var(--line);
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      margin: 9px 0;
+      align-items: center;
+    }
+    .row button {
+      flex: 1;
+    }
+    .caption {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .alert {
+      background: #fff2d9;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .toggle {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+    }
+    .toggle input {
+      accent-color: var(--orange);
+      width: 19px;
+      height: 19px;
+    }
+    .live .pill {
+      background: #e07a31;
+      color: white;
+    }
+    #message {
+      min-height: 24px;
+      color: #984326;
+      font-size: 13px;
+      padding: 0 34px 12px;
+      max-width: 1600px;
+      margin: auto;
+    }
+    input[type="number"] {
+      width: 75px;
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+    select {
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .drag {
+      cursor: grab;
+    }
+    .drag:active {
+      cursor: grabbing;
+    }
+    .drag:focus {
+      outline: none;
+      filter: drop-shadow(0 0 4px #ed8034);
+    }
+    @media (max-width: 950px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 0 14px 20px;
+      }
+      header {
+        padding: 18px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .stage svg {
+        min-height: 300px;
+      }
+      .sidebar {
+        padding: 18px;
+      }
+      #message {
+        padding: 0 16px 10px;
+      }
+    }
+  </style>
+  <header>
+    <div>
+      <div class="eyebrow">Smart Wojtech Lab / Grippy Bot</div>
+      <h1>Studio ruchu<span style="color: var(--orange)">.</span></h1>
+      <small>Chwyć pomarańczowe punkty i ustaw ramię.</small>
+    </div>
+    <div class="toolbar">
+      <span class="pill" id="connection">Łączenie…</span
+      ><label
+        >Prędkość
+        <select id="speed" aria-label="Prędkość ruchu">
+          <option value="125">0,5×</option>
+          <option value="250" selected>1×</option>
+          <option value="500">2×</option>
+          <option value="1000">4×</option>
+          <option value="2000">8×</option>
+          <option value="4000">16×</option>
+        </select></label
+      ><label class="toggle"
+        ><input type="checkbox" id="live" />Sterowanie na żywo</label
+      ><button class="stop" id="stop">STOP · wyłącz sygnały</button>
+    </div>
+  </header>
+  <div id="message" role="status" aria-live="polite"></div>
+  <main>
+    <section class="stage">
+      <div class="stage-head">
+        <div>
+          <b id="mode">Podgląd — robot pozostaje w miejscu</b>
+          <div class="caption">
+            Przeciągaj odcinki S2–S4. Obrót podstawy i chwytak ustawisz w
+            dolnych widokach.
+          </div>
+        </div>
+        <button id="sync">Pobierz pozycję zadaną</button>
+      </div>
+      <svg
+        id="robot"
+        viewBox="-220 -110 1180 1030"
+        aria-label="Schemat robota z uchwytami do przeciągania"
+      ></svg>
+      <div class="stage-foot">
+        <b>Rysunek jest schematem, nie pomiarem położenia.</b> Kąty i proporcje
+        są poglądowe. Zakresy ruchu zapisujemy w µs. Jasny obrys pokazuje
+        ostatnią pozycję wysłaną do serw.<br />STOP wyłącza impulsy, więc ramię
+        może opaść. Podeprzyj je. Zamknięcie strony pozostawia ostatnią pozycję.
+      </div>
+    </section>
+    <aside class="sidebar">
+      <h2>Przeguby</h2>
+      <div class="caption">
+        Zaznaczone przeguby włączą się razem z trybem na żywo.
+      </div>
+      <div id="joints"></div>
+      <div class="row"><button id="send">Wykonaj pozycję podglądu</button></div>
+      <div class="caption">
+        Tryb na żywo włącza zaznaczone serwa; nieaktywne ustawia na 1500 µs.
+        Odznaczenie przegubu wyłącza jego sygnał — ramię może opaść. Wyłączenie
+        trybu na żywo pozostawia ostatnią pozycję.
+      </div>
+
+      <div class="section">
+        <h2>Kalibracja <span id="calName">S2</span></h2>
+        <div class="caption">
+          Przeciąganie działa w obecnych granicach. Dalszy zakres sprawdzaj
+          małymi krokami, obserwując mechanikę.
+        </div>
+        <div class="row">
+          <button id="minus">−100 µs</button><button id="plus">+100 µs</button>
+        </div>
+        <div class="caption">
+          Kroki poruszają prawdziwym serwem i mogą wyjść poza zapisany zakres.
+          Zatrzymaj się przed oporem lub kolizją.
+        </div>
+        <div class="row">
+          <button id="saveMin">Zapisz MIN</button
+          ><button id="saveMax">Zapisz MAX</button>
+        </div>
+        <div class="caption">
+          Zapis dotyczy ostatniej wysłanej pozycji, po zakończeniu ruchu — nie
+          punktu w podglądzie.
+        </div>
+      </div>
+      <details class="section">
+        <summary>Dopasuj rysunek</summary>
+        <p class="caption">
+          Jeśli schemat obraca się w przeciwną stronę, zmień kierunek. Te
+          ustawienia zmieniają wyłącznie obraz i zostają w tej przeglądarce.
+        </p>
+        <div class="row">
+          <label
+            >Kierunek
+            <select id="direction">
+              <option value="1">Zgodny</option>
+              <option value="-1">Odwrócony</option>
+            </select></label
+          >
+        </div>
+        <div class="row">
+          <label
+            >Kąt przy 1500 µs
+            <input id="offset" type="number" min="-180" max="180" /> °</label
+          >
+        </div>
+        <p class="caption">
+          Model rysunku: 1000 µs odpowiada 90°. To przybliżenie, a nie pomiar
+          SG90. Chwytak pokazuje względne rozwarcie w zapisanym zakresie.
+        </p>
+      </details>
+    </aside>
+  </main>
+  <script>
+    "use strict";
+    const TOKEN = "__TOKEN__",
+      $ = (id) => document.getElementById(id),
+      ids = ["S1", "S2", "S3", "S4", "S5"];
+    let state = null,
+      selected = "S2",
+      draft = {},
+      drag = null,
+      live = false,
+      pending = {},
+      sending = false,
+      generation = 0,
+      connected = false,
+      lastGood = 0,
+      switching = false;
+    const enabled = new Set(ids);
+    const defaults = {
+      S1: { offset: -90, dir: 1 },
+      S2: { offset: -75, dir: 1 },
+      S3: { offset: 65, dir: -1 },
+      S4: { offset: 35, dir: 1 },
+      S5: { offset: 0, dir: 1 },
+    };
+    let visual = JSON.parse(JSON.stringify(defaults));
+    try {
+      const v = JSON.parse(localStorage.getItem("grippy-visual-v1") || "null");
+      if (v)
+        for (const s of ids)
+          if (
+            v[s] &&
+            Number.isFinite(v[s].offset) &&
+            [1, -1].includes(v[s].dir)
+          )
+            visual[s] = v[s];
+    } catch (e) {}
+    const escapeHTML = (v) =>
+      String(v).replace(
+        /[&<>"']/g,
+        (c) =>
+          ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;",
+          })[c],
+      );
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v)),
+      joint = (s) => state.joints.find((j) => j.id === s),
+      blocked = (s) => !enabled.has(s);
+    function notice(s = "") {
+      $("message").textContent = s;
+    }
+    function angle(s, values = draft) {
+      return (
+        (visual[s].offset * Math.PI) / 180 +
+        (visual[s].dir * ((values[s] ?? 1500) - 1500) * Math.PI) / 2000
+      );
+    }
+    function pose(values) {
+      let a = angle("S2", values),
+        p = [{ x: 280, y: 405 }],
+        lengths = [160, 145, 82];
+      for (let i = 0; i < 3; i++) {
+        if (i) a += angle(ids[i + 1], values);
+        const o = p[p.length - 1];
+        p.push({
+          x: o.x + lengths[i] * Math.cos(a),
+          y: o.y + lengths[i] * Math.sin(a),
+        });
+      }
+      return p;
+    }
+    function segment(a, b, color, width = 25, extra = "") {
+      return `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${color}" stroke-width="${width}" stroke-linecap="round" ${extra}/>`;
+    }
+    function handle(s, x, y, label) {
+      return `<g class="drag" data-joint="${s}" tabindex="0" role="button" aria-label="${escapeHTML(label)}; strzałki zmieniają pozycję"><circle cx="${x}" cy="${y}" r="24" fill="transparent"/><circle cx="${x}" cy="${y}" r="11" fill="${selected === s ? "#232824" : "#fffefa"}" stroke="#ed8034" stroke-width="4"/><text x="${x + 18}" y="${y - 15}" fill="#484e47" font-size="13" font-weight="700">${s}</text></g>`;
+    }
+    function render() {
+      if (!state) return;
+      if (document.activeElement !== $("speed"))
+        $("speed").value = state.speed ?? 250;
+      $("speed").disabled = !connected;
+      const p = pose(draft),
+        actual = Object.fromEntries(
+          state.joints.map((j) => [j.id, j.pulse ?? 1500]),
+        ),
+        q = pose(actual);
+      let svg = `<defs><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#dcded4"/></pattern></defs><rect x="-220" y="-110" width="1180" height="1030" fill="url(#grid)"/><text x="30" y="35" fill="#7d8278" font-size="12" letter-spacing="2">RAMIĘ · WIDOK Z BOKU</text><line x1="90" x2="800" y1="458" y2="458" stroke="#d7dbd1" stroke-width="2"/><ellipse cx="280" cy="450" rx="73" ry="13" fill="#dddcd2"/><path d="M225 443 L231 409 Q280 388 329 409 L335 443 Z" fill="#292d2a"/><ellipse cx="280" cy="409" rx="49" ry="13" fill="#4b5049"/>`;
+      for (let i = 0; i < 3; i++)
+        svg += segment(q[i], q[i + 1], "#c6cdbd", 36, 'opacity=".55"');
+      for (let i = 0; i < 3; i++) {
+        const s = ids[i + 1],
+          a = p[i],
+          b = p[i + 1];
+        svg += segment(a, b, i === 2 ? "#313733" : "#ed8034", 25);
+        svg += segment(
+          a,
+          b,
+          "transparent",
+          50,
+          `data-joint="${s}" class="drag"`,
+        );
+        svg += `<circle cx="${a.x}" cy="${a.y}" r="15" fill="#252c28"/><circle cx="${a.x}" cy="${a.y}" r="5" fill="#a4aba1"/>`;
+        svg += handle(
+          s,
+          a.x + (b.x - a.x) * 0.7,
+          a.y + (b.y - a.y) * 0.7,
+          joint(s).name,
+        );
+      }
+      let a = Math.atan2(p[3].y - p[2].y, p[3].x - p[2].x),
+        opening =
+          (draft.S5 - joint("S5").min) / (joint("S5").max - joint("S5").min),
+        gap = 10 + 35 * (visual.S5.dir === 1 ? opening : 1 - opening);
+      svg += `<g transform="translate(${p[3].x} ${p[3].y}) rotate(${(a * 180) / Math.PI})"><path d="M0 -13 L35 -13 L40 -5" fill="none" stroke="#303632" stroke-width="9" stroke-linecap="round"/><path d="M0 ${gap} L35 ${gap} L40 ${gap - 8}" fill="none" stroke="#ed8034" stroke-width="9" stroke-linecap="round"/></g>`;
+      const bc = { x: 170, y: 591 },
+        ba = angle("S1"),
+        bx = bc.x + 60 * Math.cos(ba),
+        by = bc.y + 60 * Math.sin(ba);
+      svg += `<path d="M30 492 H870" stroke="#deded3"/><text x="35" y="523" fill="#7d8278" font-size="12" letter-spacing="2">PODSTAWA · Z GÓRY</text><circle cx="170" cy="591" r="68" fill="#e7e8df" stroke="#d5d9ce"/><circle cx="170" cy="591" r="42" fill="#303632"/>${segment(bc, { x: bx, y: by }, "#ed8034", 12)}${handle("S1", bx, by, "Obrót podstawy")}<text x="35" y="685" fill="#7d8278" font-size="12">Przeciągnij punkt wokół osi.</text><text x="500" y="523" fill="#7d8278" font-size="12" letter-spacing="2">CHWYTAK · ROZWARCIE</text><rect x="570" y="555" width="40" height="75" rx="9" fill="#303632"/><path d="M590 565 H715 V580" fill="none" stroke="#303632" stroke-width="13" stroke-linecap="round"/><path d="M590 ${595 + gap} H715 V${580 + gap}" fill="none" stroke="#ed8034" stroke-width="13" stroke-linecap="round"/>${handle("S5", 680, 595 + gap, "Rozwarcie chwytaka")}<text x="500" y="685" fill="#7d8278" font-size="12">Przeciągnij pomarańczową szczękę w pionie.</text>`;
+      $("robot").innerHTML = svg;
+      $("joints").innerHTML = state.joints
+        .map(
+          (j) =>
+            `<div class="joint ${selected === j.id ? "selected" : ""}" data-select="${j.id}" role="group" tabindex="0"><div class="joint-top"><label class="toggle"><input type="checkbox" data-enable="${j.id}" aria-label="Włącz ${escapeHTML(j.name)}" ${enabled.has(j.id) ? "checked" : ""} ${!connected || switching ? "disabled" : ""}><b>${j.id} · ${escapeHTML(j.name)}</b></label><span class="value">${draft[j.id]} µs</span></div><small>${j.pulse === null ? "Sygnał wyłączony" : "Wysłano " + j.pulse + " µs"} · ${j.min}–${j.max}</small><br><small>${j.min_saved ? "MIN ✓" : "MIN roboczy"} / ${j.max_saved ? "MAX ✓" : "MAX roboczy"}${blocked(j.id) ? " · odznaczony" : ""}</small></div>`,
+        )
+        .join("");
+      $("calName").textContent = selected;
+      if (document.activeElement !== $("direction"))
+        $("direction").value = visual[selected].dir;
+      if (document.activeElement !== $("offset"))
+        $("offset").value = visual[selected].offset;
+      const j = joint(selected),
+        disabled = !connected || state.busy || switching || blocked(selected);
+      $("live").disabled = !connected || switching;
+      $("minus").disabled = $("plus").disabled =
+        disabled || j.pulse === null || live;
+      $("saveMin").disabled = $("saveMax").disabled =
+        disabled || j.pulse === null || live;
+      $("send").disabled =
+        !connected ||
+        state.busy ||
+        switching ||
+        live ||
+        !state.joints.some((j) => j.pulse !== null && !blocked(j.id));
+      $("mode").textContent = live
+        ? "Na żywo — przeciąganie porusza serwami"
+        : "Podgląd — robot pozostaje w miejscu";
+      $("connection").textContent = connected
+        ? (state.simulation ? "DEMO · " : "") +
+          (live ? "NA ŻYWO" : "Połączono · podgląd")
+        : "Brak połączenia";
+      document.body.classList.toggle("live", live);
+    }
+    function setLive(v) {
+      live = v;
+      generation++;
+      pending = {};
+      $("live").checked = v;
+      render();
+    }
+    async function command(body) {
+      const r = await fetch("/api/command", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Control-Token": TOKEN,
+        },
+        body: JSON.stringify(body),
+      });
+      const v = await r.json();
+      if (!r.ok) throw Error(v.error || "Błąd polecenia");
+      state = v;
+      return v;
+    }
+    async function act(body) {
+      try {
+        notice();
+        await command(body);
+        render();
+      } catch (e) {
+        notice(e.message);
+      }
+    }
+    function update(s, v) {
+      const j = joint(s);
+      draft[s] = clamp(Math.round(v), j.min, j.max);
+      if (live) {
+        if (j.pulse === null)
+          notice(
+            s +
+              " ma wyłączony sygnał. Zaznacz jego checkbox lub ponownie włącz tryb na żywo.",
+          );
+        else if (blocked(s))
+          notice(s + " jest odznaczony — zmieniasz tylko podgląd.");
+        else {
+          pending[s] = draft[s];
+          notice();
+        }
+      }
+      render();
+    }
+    setInterval(async () => {
+      if (sending || switching || !live || !Object.keys(pending).length) return;
+      const targets = pending;
+      pending = {};
+      const g = generation;
+      sending = true;
+      try {
+        await command({ action: "follow", targets });
+        if (g === generation) render();
+      } catch (e) {
+        if (g === generation) {
+          setLive(false);
+          notice(e.message);
+        }
+      } finally {
+        sending = false;
+      }
+    }, 80);
+    let pollRunning = false;
+    async function poll() {
+      if (pollRunning) return;
+      pollRunning = true;
+      try {
+        const r = await fetch("/api/state", {
+          cache: "no-store",
+          signal: AbortSignal.timeout(2000),
+        });
+        if (!r.ok) throw Error("Brak połączenia");
+        const v = await r.json();
+        if (!state) for (const j of v.joints) draft[j.id] = j.pulse ?? 1500;
+        state = v;
+        connected = true;
+        lastGood = Date.now();
+        if (v.error) {
+          setLive(false);
+          notice(v.error);
+        }
+        render();
+      } catch (e) {
+        connected = false;
+        setLive(false);
+        notice(
+          "Utracono połączenie. Serwa mogą nadal trzymać ostatnią pozycję.",
+        );
+      } finally {
+        pollRunning = false;
+      }
+    }
+    setInterval(poll, 350);
+    poll();
+    async function waitIdle() {
+      for (let n = 0; n < 150; n++) {
+        const r = await fetch("/api/state", {
+          cache: "no-store",
+          signal: AbortSignal.timeout(2000),
+        });
+        if (!r.ok) throw Error("Brak połączenia");
+        state = await r.json();
+        if (state.error) throw Error(state.error);
+        if (!state.busy) return;
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+      throw Error("Serwa nadal wykonują ruch. Użyj STOP.");
+    }
+    $("live").onchange = async () => {
+      const wanted = $("live").checked;
+      if (!wanted) {
+        setLive(false);
+        notice("Podgląd. Serwa utrzymują ostatnią pozycję.");
+        return;
+      }
+      if (!connected || !state || switching) {
+        $("live").checked = false;
+        return;
+      }
+      const chosen = ids.filter((s) => enabled.has(s));
+      if (!chosen.length) {
+        $("live").checked = false;
+        notice("Zaznacz co najmniej jeden przegub.");
+        return;
+      }
+      switching = true;
+      const epoch = ++generation;
+      render();
+      try {
+        await waitIdle();
+        if (epoch !== generation) return;
+        const off = state.joints
+          .filter((j) => !enabled.has(j.id) && j.pulse !== null)
+          .map((j) => j.id);
+        if (off.length) await command({ action: "disable", ids: off });
+        if (epoch !== generation) return;
+        const on = state.joints
+          .filter((j) => enabled.has(j.id) && j.pulse === null)
+          .map((j) => j.id);
+        if (on.length) {
+          await command({ action: "enable", ids: on });
+          await waitIdle();
+        }
+        if (epoch !== generation) return;
+        for (const j of state.joints) draft[j.id] = j.pulse ?? draft[j.id];
+        setLive(true);
+        notice("Na żywo — sterujesz zaznaczonymi przegubami.");
+      } catch (e) {
+        setLive(false);
+        notice(e.message);
+      } finally {
+        switching = false;
+        render();
+      }
+    };
+    $("joints").onchange = async (e) => {
+      const input = e.target;
+      if (!input.matches("[data-enable]")) return;
+      const s = input.dataset.enable,
+        wasOn = enabled.has(s);
+      if (input.checked) enabled.add(s);
+      else enabled.delete(s);
+      delete pending[s];
+      const epoch = ++generation;
+      switching = true;
+      render();
+      try {
+        if (!enabled.has(s)) {
+          await command({ action: "disable", ids: [s] });
+          notice(s + " — sygnał wyłączony. Podeprzyj tę część ramienia.");
+        } else if (live) {
+          await waitIdle();
+          if (epoch !== generation) return;
+          if (joint(s).pulse === null) {
+            await command({ action: "enable", ids: [s] });
+            await waitIdle();
+          }
+          draft[s] = joint(s).pulse ?? 1500;
+          notice(s + " — włączony.");
+        } else notice(s + " zaznaczony. Włączy się razem z trybem na żywo.");
+      } catch (e) {
+        if (wasOn) enabled.add(s);
+        else enabled.delete(s);
+        setLive(false);
+        notice(e.message);
+      } finally {
+        switching = false;
+        render();
+      }
+    };
+    $("speed").onchange = () =>
+      act({ action: "speed", value: Number($("speed").value) });
+    $("stop").onclick = async () => {
+      setLive(false);
+      await act({ action: "stop" });
+      notice("Sygnały wyłączone. Podeprzyj ramię; STOP nie odcina zasilacza.");
+    };
+    $("sync").onclick = () => {
+      if (!state) return;
+      setLive(false);
+      for (const j of state.joints)
+        draft[j.id] = clamp(j.pulse ?? 1500, j.min, j.max);
+      notice(
+        "Wczytano ostatnie wysłane impulsy. To nie jest odczyt fizycznego kąta.",
+      );
+      render();
+    };
+    $("send").onclick = () => {
+      const active = state.joints.filter(
+        (j) => j.pulse !== null && !blocked(j.id),
+      );
+      act({
+        action: "move",
+        ids: active.map((j) => j.id),
+        targets: Object.fromEntries(active.map((j) => [j.id, draft[j.id]])),
+      });
+    };
+    for (const [id, delta] of [
+      ["minus", -100],
+      ["plus", 100],
+    ])
+      $(id).onclick = () => act({ action: "step", ids: [selected], delta });
+    for (const [id, edge] of [
+      ["saveMin", "min"],
+      ["saveMax", "max"],
+    ])
+      $(id).onclick = async () => {
+        await act({ action: "save", ids: [selected], edge });
+        for (const j of state.joints)
+          draft[j.id] = clamp(draft[j.id], j.min, j.max);
+        render();
+      };
+    $("joints").onclick = (e) => {
+      if (e.target.closest("label")) return;
+      const t = e.target.closest("[data-select]");
+      if (t) {
+        selected = t.dataset.select;
+        render();
+      }
+    };
+    $("joints").onkeydown = (e) => {
+      if (e.target.matches("input")) return;
+      if (["Enter", " "].includes(e.key)) {
+        e.preventDefault();
+        e.target.click();
+      }
+    };
+    for (const id of ["direction", "offset"])
+      $(id).onchange = () => {
+        setLive(false);
+        visual[selected] = {
+          dir: Number($("direction").value),
+          offset: clamp(Number($("offset").value) || 0, -180, 180),
+        };
+        localStorage.setItem("grippy-visual-v1", JSON.stringify(visual));
+        render();
+      };
+    function xy(e) {
+      const pt = new DOMPoint(e.clientX, e.clientY);
+      return pt.matrixTransform($("robot").getScreenCTM().inverse());
+    }
+    $("robot").onpointerdown = (e) => {
+      if (!state || e.button !== 0) return;
+      const t = e.target.closest("[data-joint]");
+      if (!t) return;
+      selected = t.dataset.joint;
+      const pos = xy(e),
+        s = selected,
+        p = pose(draft),
+        pivot =
+          s === "S1"
+            ? { x: 170, y: 591 }
+            : s === "S5"
+              ? null
+              : p[ids.indexOf(s) - 1];
+      drag = {
+        id: s,
+        start: draft[s],
+        y: pos.y,
+        pivot,
+        last: pivot ? Math.atan2(pos.y - pivot.y, pos.x - pivot.x) : 0,
+        delta: 0,
+      };
+      $("robot").setPointerCapture(e.pointerId);
+      e.preventDefault();
+      render();
+    };
+    $("robot").onpointermove = (e) => {
+      if (!drag) return;
+      const pos = xy(e),
+        d = drag,
+        j = joint(d.id);
+      if (d.id === "S5") {
+        update(
+          d.id,
+          d.start + ((pos.y - d.y) / 35) * (j.max - j.min) * visual[d.id].dir,
+        );
+        return;
+      }
+      const a = Math.atan2(pos.y - d.pivot.y, pos.x - d.pivot.x);
+      let diff = a - d.last;
+      diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+      d.delta += diff;
+      d.last = a;
+      update(d.id, d.start + ((d.delta * 2000) / Math.PI) * visual[d.id].dir);
+    };
+    $("robot").onpointerup = $("robot").onpointercancel = () => {
+      drag = null;
+    };
+    $("robot").onkeydown = (e) => {
+      const t = e.target.closest("[data-joint]");
+      if (!t || !state) return;
+      if (["ArrowRight", "ArrowUp", "ArrowLeft", "ArrowDown"].includes(e.key)) {
+        e.preventDefault();
+        selected = t.dataset.joint;
+        update(
+          selected,
+          draft[selected] +
+            (["ArrowRight", "ArrowUp"].includes(e.key) ? 25 : -25),
+        );
+        const focus = $("robot").querySelector(`g[data-joint="${selected}"]`);
+        focus?.focus();
+      }
+    };
+    window.addEventListener("blur", () => {
+      if (live) {
+        setLive(false);
+        notice(
+          "Okno straciło fokus: wrócono do podglądu. Robot utrzymuje ostatnie zadanie.",
+        );
+      }
+      drag = null;
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") $("stop").click();
+    });
+  </script>
+</html>

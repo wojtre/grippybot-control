@@ -1,0 +1,9 @@
+{
+  "joints": {
+    "S1": {"name": "Podstawa", "gpio": 17},
+    "S2": {"name": "Bark", "gpio": 27},
+    "S3": {"name": "Łokieć", "gpio": 22},
+    "S4": {"name": "Nadgarstek", "gpio": 23},
+    "S5": {"name": "Chwytak", "gpio": 24}
+  }
+}
