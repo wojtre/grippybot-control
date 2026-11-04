@@ -6,19 +6,12 @@ Projekt dla osób budujących pierwszego robota. Instrukcja jest po polsku. Nie 
 
 ![Panel w trybie demonstracyjnym, bez podłączonego robota](docs/panel-demo.png)
 
-## Co potrafi panel
+## Co znajdziesz w repozytorium
 
-- Sterowanie pięcioma serwami SG90: podstawą, barkiem, łokciem, nadgarstkiem i chwytakiem.
-- Przeciąganie przegubów na pomarańczowo-czarnym schemacie 2D.
-- Sterowanie na żywo i wspólne włączanie zaznaczonych przegubów.
-- Osobny checkbox do wyłączenia sygnału każdego serwa.
-- Płynne ruchy i wybór prędkości od 0,5× do 16×.
-- Kalibracja oraz zapis zakresów MIN/MAX dla każdego przegubu.
-- Podgląd pozycji przed wysłaniem ruchu i tryb demonstracyjny bez sprzętu.
-- STOP wyłączający sygnały wszystkich serw.
-- Dostęp z przeglądarki przez SSH i automatyczny start panelu na Raspberry Pi.
-
-Schemat pokazuje zadane pozycje, nie pomiar rzeczywistych kątów. Panel służy do ręcznego sterowania ramieniem i jego kalibracji.
+- Panel do sterowania robotem na żywo i kalibracji serw.
+- Instrukcję instalacji na Raspberry Pi.
+- Instrukcje podłączenia, połączenia przez SSH i uruchamiania panelu.
+- Skill do instalacji i konfiguracji z pomocą Codex lub Claude Code.
 
 ## Instalacja z pomocą agenta
 
