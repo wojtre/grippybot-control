@@ -42,7 +42,7 @@ Jeżeli Twoja wersja aplikacji nie pokazuje nowego skilla, rozpocznij nową sesj
 
 - „Wyjaśnij mi różnicę między BCM a fizycznym numerem pinu na podstawie tego projektu”.
 - „Sprawdź, dlaczego panel nie otwiera się po restarcie Pi. Nie restartuj serw, jeśli są aktywne”.
-- „Dodaj nagrywanie pozycji w osobnej gałęzi. Najpierw zaprojektuj to w symulacji”.
+- „Pomóż mi dopasować kierunek i neutralne ustawienie przegubów na schemacie. Najpierw sprawdź to w symulacji”.
 
 Nie wpisuj do czatu hasła Wi-Fi, hasła SSH ani prywatnego klucza. Skill nie daje asystentowi dostępu do urządzenia; połączenie i zakres działań nadal zależą od Twojego środowiska i poleceń.
 

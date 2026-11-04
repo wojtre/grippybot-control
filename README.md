@@ -6,9 +6,33 @@ Projekt dla osób budujących pierwszego robota. Instrukcja jest po polsku. Nie 
 
 ![Panel w trybie demonstracyjnym, bez podłączonego robota](docs/panel-demo.png)
 
-**Co działa:** sterowanie pięcioma SG90, wspólny start zaznaczonych przegubów, osobne wyłączanie sygnałów, płynny ruch, prędkości 0,5×–16×, kalibracja MIN/MAX, STOP i schemat pomarańczowo-czarnego ramienia. Schemat pokazuje zadane pozycje, nie pomiar rzeczywistych kątów.
+## Co potrafi panel
 
-**Zakres projektu:** to panel ręcznego sterowania. Kamera, nagrywanie demonstracji i trening modeli nie są tu jeszcze zaimplementowane. Projektem uczenia przez naśladowanie jest osobne [repozytorium Aryana Madhava Vermy](https://github.com/AryanMadhavVerma/grippybot).
+- Sterowanie pięcioma serwami SG90: podstawą, barkiem, łokciem, nadgarstkiem i chwytakiem.
+- Przeciąganie przegubów na pomarańczowo-czarnym schemacie 2D.
+- Sterowanie na żywo i wspólne włączanie zaznaczonych przegubów.
+- Osobny checkbox do wyłączenia sygnału każdego serwa.
+- Płynne ruchy i wybór prędkości od 0,5× do 16×.
+- Kalibracja oraz zapis zakresów MIN/MAX dla każdego przegubu.
+- Podgląd pozycji przed wysłaniem ruchu i tryb demonstracyjny bez sprzętu.
+- STOP wyłączający sygnały wszystkich serw.
+- Dostęp z przeglądarki przez SSH i automatyczny start panelu na Raspberry Pi.
+
+Schemat pokazuje zadane pozycje, nie pomiar rzeczywistych kątów. Panel służy do ręcznego sterowania ramieniem i jego kalibracji.
+
+## Instalacja z pomocą agenta
+
+**Konfigurację oprogramowania możesz przejść z agentem w Codex lub Claude Code**, korzystając z dołączonego skilla [`grippybot-setup`](skills/grippybot-setup/SKILL.md). Agent pomoże dobrać polecenia do Twojego loginu i hosta, zainstalować kontroler, skonfigurować usługi, zestawić tunel SSH i sprawdzić działanie panelu.
+
+Otwórz repozytorium w wybranym narzędziu i skorzystaj z [krótkiej instrukcji uruchomienia skilla](docs/agents.md). Możesz też od razu napisać:
+
+```text
+Przeczytaj skills/grippybot-setup/SKILL.md i pomóż mi zainstalować ten
+kontroler na Raspberry Pi 4. Wyjaśniaj kroki dla początkującego i zaznaczaj,
+które polecenia wykonujemy na komputerze, a które na Pi. Nie wykonuj ruchów robota.
+```
+
+Agent potrzebuje dostępu do terminala i Twojego Pi, aby wykonywać polecenia. Włożenie karty, podłączenie przewodów i wpisanie haseł pozostają po Twojej stronie. Jeśli wolisz instalację ręczną, postępuj według instrukcji poniżej.
 
 ## 1. Najpierw wypróbuj bez robota
 
@@ -29,7 +53,7 @@ Jeżeli port jest zajęty, dodaj `--port 8766` i otwórz http://127.0.0.1:8766.
 - Raspberry Pi 4 Model B i karta microSD. Referencyjny zestaw działa na **Raspberry Pi OS Lite, Legacy / Bookworm, 64-bit**, Python 3.11.
 - Pi 400 ma ten sam obsługiwany przez instalator wariant sprzętowy; nie został przez nas sprawdzony na fizycznym robocie. **Pi 5 nie jest obsługiwane przez ten sterownik.** Nie wybieraj innego systemu wyłącznie dlatego, że jest nowszy — instrukcja instalacji jest dla Bookworm.
 - Pięć pozycyjnych serw **SG90 180°**. Wersja o obrocie ciągłym 360° nie zastępuje serwa pozycyjnego.
-- Wydruki i części mechaniczne Grippy Bot. [Projekt, STL i montaż](https://github.com/AryanMadhavVerma/grippybot/tree/main/assembly) pochodzą z osobnego projektu; nie są dołączone do tego repozytorium.
+- Wydruki i części mechaniczne Grippy Bot. [Pliki STL udostępnione przez Roboteurs](https://cults3d.com/en/3d-model/gadget/grippy-bot) pobierzesz ze strony autora mechaniki; nie są dołączone do tego repozytorium.
 - Osobny, stabilizowany zasilacz **5 V do serw**. Wydajność prądową dobierz do pięciu konkretnych serw, uwzględniając prąd rozruchu i zatrzymania. Nie zasilaj silników z GPIO ani z pinu 3,3 V Pi.
 - Własny zasilacz Raspberry Pi, przewody sygnałowe i solidne rozprowadzenie zasilania, np. WAGO z odpowiednimi przewodami. Płytka stykowa nie jest wymagana.
 
@@ -171,4 +195,4 @@ Poczekaj na zakończenie zamykania, zanim odłączysz Pi od prądu. Samo zamkni�
 
 Panel powstał w Smart Wojtech Lab z pomocą Codex. Sterowanie fizycznego prototypu sprawdzono na Pi 4 / Bookworm. Publiczna wersja uogólnia ścieżki, konfigurację i instalację; testy automatyczne działają na symulowanych serwach. Nie przeprowadzono jeszcze instalacji na czystej karcie SD przez niezależnego widza.
 
-Kod tego repozytorium: [MIT](LICENSE). Mechanika Grippy Bot pochodzi od Roboteurs; repozytorium [AryanMadhavVerma/grippybot](https://github.com/AryanMadhavVerma/grippybot) zawiera montaż i osobny pipeline uczenia. Biblioteka [pigpio](https://github.com/joan2937/pigpio) jest niezależną zależnością. Licencja tego panelu nie zmienia licencji cudzych modeli, zdjęć ani kodu.
+Kod tego repozytorium: [MIT](LICENSE). Mechanika Grippy Bot jest projektem [Roboteurs](https://cults3d.com/en/3d-model/gadget/grippy-bot). Biblioteka [pigpio](https://github.com/joan2937/pigpio) jest niezależną zależnością. Licencja tego panelu nie zmienia licencji cudzych modeli, zdjęć ani kodu.

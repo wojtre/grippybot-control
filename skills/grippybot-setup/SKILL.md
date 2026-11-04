@@ -1,6 +1,6 @@
 ---
 name: grippybot-setup
-description: "Install, configure, explain or troubleshoot the Grippy Bot Control browser panel on Raspberry Pi 4, including SSH, pigpio, systemd and per-servo calibration. Use for this controller, not unrelated robots or model training."
+description: "Install, configure, explain or troubleshoot the Grippy Bot Control browser panel on Raspberry Pi 4, including SSH, pigpio, systemd and per-servo calibration. Use for this controller, not unrelated robot controllers."
 ---
 
 # Grippy Bot Control
@@ -27,7 +27,7 @@ Read only the relevant additional document from the checkout:
 - Installation enables boot services but startup sends no servo pulses. The installer detects existing controllers and refuses to take them over. Do not kill unknown processes or silently disable an existing robot stack.
 - Calibration belongs to that physical robot: preserve `config.json` and `data/ranges.json`. Never copy someone else's extrema as verified limits. 500–2500 µs are software technical bounds, not safe travel guarantees.
 - `1500 µs` is nominal servo center. Live-on enables checked inactive servos at this value. Unchecking a servo disables its signal; STOP disables all signals. Those actions can release an unsupported arm. Closing the page, dropping SSH or leaving live mode does not remove power and can leave the last target active.
-- The SVG and saved `pulse` values are commanded positions, not measured angles. No feedback, automatic collision detection, hardware power cut or camera training is implemented.
+- The SVG and saved `pulse` values are commanded positions, not measured angles. No feedback, automatic collision detection, hardware power cut is implemented.
 
 ## Work with the user
 
