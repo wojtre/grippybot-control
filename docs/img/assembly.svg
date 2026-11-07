@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 560" width="980" height="560" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>Budowa ramienia Grippy Bot: która część trzyma które serwo</title>
+  <rect width="980" height="560" rx="18" fill="#0f1a1c"/>
+  <text x="30" y="40" fill="#e8f6f3" font-size="22" font-weight="700">Która część trzyma które serwo</text>
+  <text x="30" y="64" fill="#8fb3ad" font-size="14">Każda część ma ramkę na korpus kolejnego serwa i widełki, które obejmują wałek poprzedniego. Widok z boku.</text>
+
+  <!-- ground -->
+  <line x1="60" y1="500" x2="520" y2="500" stroke="#3a5257" stroke-width="2"/>
+  <!-- Base -->
+  <rect x="120" y="420" width="170" height="80" rx="10" fill="#d8e2e0"/>
+  <rect x="180" y="440" width="50" height="34" rx="4" fill="#3f7bd6"/><text x="205" y="462" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">S1</text>
+  <!-- BaseSpin -->
+  <rect x="100" y="404" width="210" height="14" rx="6" fill="#b9c6c3"/>
+  <rect x="170" y="370" width="70" height="34" rx="4" fill="#3f7bd6"/>
+  <!-- BaseArm -->
+  <path d="M205 388 L250 250" stroke="#ff8a3d" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="205" cy="388" r="9" fill="#0f1a1c" stroke="#ffffff" stroke-width="3"/>
+  <rect x="228" y="232" width="44" height="36" rx="4" fill="#3f7bd6"/>
+  <!-- MidArm -->
+  <path d="M250 250 L380 200" stroke="#ff8a3d" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="250" cy="250" r="9" fill="#0f1a1c" stroke="#ffffff" stroke-width="3"/>
+  <rect x="358" y="182" width="44" height="36" rx="4" fill="#3f7bd6"/>
+  <!-- GripperArm -->
+  <path d="M380 200 L470 236" stroke="#d8e2e0" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="380" cy="200" r="9" fill="#0f1a1c" stroke="#ffffff" stroke-width="3"/>
+  <rect x="430" y="208" width="40" height="32" rx="4" fill="#3f7bd6"/><text x="450" y="229" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">S5</text>
+  <path d="M470 236 L520 262" stroke="#d8e2e0" stroke-width="8" stroke-linecap="round"/>
+  <!-- Finger -->
+  <path d="M458 252 L500 288" stroke="#ff8a3d" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="452" cy="244" r="7" fill="#0f1a1c" stroke="#ffffff" stroke-width="3"/>
+
+  <g font-size="15" font-weight="700" fill="#9cc4ff">
+    <text x="160" y="393" text-anchor="end">S2</text>
+    <text x="218" y="256" text-anchor="end">S3</text>
+    <text x="380" y="172" text-anchor="middle">S4</text>
+  </g>
+  <!-- table -->
+  <g font-size="14">
+    <text x="580" y="120" fill="#8fb3ad" font-size="12" font-weight="700">CZĘŚĆ</text>
+    <text x="720" y="120" fill="#8fb3ad" font-size="12" font-weight="700">SERWO W RAMCE</text>
+    <text x="860" y="120" fill="#8fb3ad" font-size="12" font-weight="700">GPIO</text>
+    <g fill="#e8f6f3">
+      <text x="580" y="156">Base</text><text x="720" y="156" fill="#65f5da" font-weight="700">S1 podstawa</text><text x="860" y="156" fill="#ffc48a">17 / pin 11</text>
+      <text x="580" y="196">BaseSpin</text><text x="720" y="196" fill="#65f5da" font-weight="700">S2 bark</text><text x="860" y="196" fill="#ffc48a">27 / pin 13</text>
+      <text x="580" y="236">BaseArm</text><text x="720" y="236" fill="#65f5da" font-weight="700">S3 łokieć</text><text x="860" y="236" fill="#ffc48a">22 / pin 15</text>
+      <text x="580" y="276">MidArm</text><text x="720" y="276" fill="#65f5da" font-weight="700">S4 nadgarstek</text><text x="860" y="276" fill="#ffc48a">23 / pin 16</text>
+      <text x="580" y="316">GripperArm</text><text x="720" y="316" fill="#65f5da" font-weight="700">S5 chwytak</text><text x="860" y="316" fill="#ffc48a">24 / pin 18</text>
+      <text x="580" y="356">Finger</text><text x="720" y="356" fill="#c9dcd8">na orczyku S5</text><text x="860" y="356" fill="#6f8a86">—</text>
+    </g>
+  </g>
+  <g font-size="13" fill="#c9dcd8">
+    <text x="580" y="410">Kolejność: Base → BaseSpin → BaseArm →</text>
+    <text x="580" y="430">MidArm → GripperArm → Finger.</text>
+    <text x="580" y="462" fill="#ffc48a" font-weight="700">Orczyki zakładaj dopiero, gdy serwo stoi</text>
+    <text x="580" y="482" fill="#ffc48a" font-weight="700">na środku (1500 µs).</text>
+  </g>
+  <g font-size="12" fill="#8fb3ad">
+    <rect x="60" y="522" width="14" height="10" fill="#3f7bd6"/><text x="80" y="531">serwo SG90</text>
+    <circle cx="180" cy="527" r="6" fill="#0f1a1c" stroke="#fff" stroke-width="2"/><text x="192" y="531">oś przegubu (wałek serwa)</text>
+  </g>
+</svg>

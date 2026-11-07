@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 640" width="980" height="640" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>Schemat połączeń Grippy Bot: osobne zasilanie serw, wspólna masa, pięć sygnałów z Raspberry Pi</title>
+  <rect width="980" height="640" rx="18" fill="#0f1a1c"/>
+  <text x="30" y="40" fill="#e8f6f3" font-size="22" font-weight="700">Dwa zasilania, wspólna masa</text>
+  <text x="30" y="64" fill="#8fb3ad" font-size="14">Serwa zasila osobny zasilacz 5 V przez szyny płytki stykowej. Pi ma własny zasilacz USB-C. Łączy je tylko GND i 5 sygnałów.</text>
+
+  <!-- Servo PSU -->
+  <rect x="30" y="96" width="210" height="96" rx="12" fill="#1a2a2d" stroke="#d9534f" stroke-width="2"/>
+  <text x="46" y="124" fill="#e8f6f3" font-size="16" font-weight="700">Zasilacz serw</text>
+  <text x="46" y="146" fill="#c9dcd8" font-size="14">5 V DC, min. 3 A</text>
+  <text x="46" y="166" fill="#8fb3ad" font-size="12">(zalecane 4–5 A)</text>
+  <text x="262" y="121" fill="#ff6b62" font-size="15" font-weight="700">+</text>
+  <text x="262" y="167" fill="#b8c7c4" font-size="15" font-weight="700">−</text>
+
+  <!-- rails -->
+  <line x1="240" y1="128" x2="300" y2="128" stroke="#ff6b62" stroke-width="4"/>
+  <line x1="240" y1="174" x2="300" y2="174" stroke="#b8c7c4" stroke-width="4"/>
+  <rect x="300" y="118" width="640" height="20" rx="6" fill="#5c1f1d" stroke="#ff6b62" stroke-width="2"/>
+  <rect x="300" y="164" width="640" height="20" rx="6" fill="#2b3638" stroke="#b8c7c4" stroke-width="2"/>
+
+  <!-- servos -->
+  <g font-size="13">
+    <g transform="translate(330 250)">
+      <line x1="22" y1="0" x2="22" y2="-112" stroke="#ff6b62" stroke-width="3"/><circle cx="22" cy="-112" r="5" fill="#ff6b62"/>
+      <line x1="46" y1="0" x2="46" y2="-66" stroke="#9b7653" stroke-width="3"/><circle cx="46" cy="-66" r="5" fill="#b8c7c4"/>
+      <line x1="70" y1="92" x2="70" y2="236" stroke="#ff9f43" stroke-width="3"/>
+      <rect width="100" height="92" rx="10" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+      <text x="12" y="30" fill="#65f5da" font-weight="700" font-size="18">S1</text><text x="12" y="52" fill="#e8f6f3">Podstawa</text><text x="12" y="74" fill="#8fb3ad" font-size="11">SG90 w Base</text>
+    </g>
+    <g transform="translate(450 250)">
+      <line x1="22" y1="0" x2="22" y2="-112" stroke="#ff6b62" stroke-width="3"/><circle cx="22" cy="-112" r="5" fill="#ff6b62"/>
+      <line x1="46" y1="0" x2="46" y2="-66" stroke="#9b7653" stroke-width="3"/><circle cx="46" cy="-66" r="5" fill="#b8c7c4"/>
+      <line x1="70" y1="92" x2="70" y2="236" stroke="#ff9f43" stroke-width="3"/>
+      <rect width="100" height="92" rx="10" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+      <text x="12" y="30" fill="#65f5da" font-weight="700" font-size="18">S2</text><text x="12" y="52" fill="#e8f6f3">Bark</text><text x="12" y="74" fill="#8fb3ad" font-size="11">na BaseSpin</text>
+    </g>
+    <g transform="translate(570 250)">
+      <line x1="22" y1="0" x2="22" y2="-112" stroke="#ff6b62" stroke-width="3"/><circle cx="22" cy="-112" r="5" fill="#ff6b62"/>
+      <line x1="46" y1="0" x2="46" y2="-66" stroke="#9b7653" stroke-width="3"/><circle cx="46" cy="-66" r="5" fill="#b8c7c4"/>
+      <line x1="70" y1="92" x2="70" y2="236" stroke="#ff9f43" stroke-width="3"/>
+      <rect width="100" height="92" rx="10" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+      <text x="12" y="30" fill="#65f5da" font-weight="700" font-size="18">S3</text><text x="12" y="52" fill="#e8f6f3">Łokieć</text><text x="12" y="74" fill="#8fb3ad" font-size="11">w BaseArm</text>
+    </g>
+    <g transform="translate(690 250)">
+      <line x1="22" y1="0" x2="22" y2="-112" stroke="#ff6b62" stroke-width="3"/><circle cx="22" cy="-112" r="5" fill="#ff6b62"/>
+      <line x1="46" y1="0" x2="46" y2="-66" stroke="#9b7653" stroke-width="3"/><circle cx="46" cy="-66" r="5" fill="#b8c7c4"/>
+      <line x1="70" y1="92" x2="70" y2="236" stroke="#ff9f43" stroke-width="3"/>
+      <rect width="100" height="92" rx="10" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+      <text x="12" y="30" fill="#65f5da" font-weight="700" font-size="18">S4</text><text x="12" y="52" fill="#e8f6f3">Nadgarstek</text><text x="12" y="74" fill="#8fb3ad" font-size="11">w MidArm</text>
+    </g>
+    <g transform="translate(810 250)">
+      <line x1="22" y1="0" x2="22" y2="-112" stroke="#ff6b62" stroke-width="3"/><circle cx="22" cy="-112" r="5" fill="#ff6b62"/>
+      <line x1="46" y1="0" x2="46" y2="-66" stroke="#9b7653" stroke-width="3"/><circle cx="46" cy="-66" r="5" fill="#b8c7c4"/>
+      <line x1="70" y1="92" x2="70" y2="236" stroke="#ff9f43" stroke-width="3"/>
+      <rect width="100" height="92" rx="10" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+      <text x="12" y="30" fill="#65f5da" font-weight="700" font-size="18">S5</text><text x="12" y="52" fill="#e8f6f3">Chwytak</text><text x="12" y="74" fill="#8fb3ad" font-size="11">w GripperArm</text>
+    </g>
+  </g>
+
+  <!-- signal labels -->
+  <g font-size="12" fill="#ffc48a" font-family="ui-monospace, Menlo, Consolas, monospace">
+    <text x="418" y="476" transform="rotate(-90 418 476)">GPIO17 · pin 11</text>
+    <text x="538" y="476" transform="rotate(-90 538 476)">GPIO27 · pin 13</text>
+    <text x="658" y="476" transform="rotate(-90 658 476)">GPIO22 · pin 15</text>
+    <text x="778" y="476" transform="rotate(-90 778 476)">GPIO23 · pin 16</text>
+    <text x="898" y="476" transform="rotate(-90 898 476)">GPIO24 · pin 18</text>
+  </g>
+
+  <!-- Raspberry Pi -->
+  <rect x="330" y="486" width="600" height="96" rx="12" fill="#1a2a2d" stroke="#65f5da" stroke-width="2"/>
+  <text x="350" y="516" fill="#e8f6f3" font-size="17" font-weight="700">Raspberry Pi 4</text>
+  <text x="350" y="540" fill="#c9dcd8" font-size="13">5 sygnałów PWM (3,3 V) przez pigpio</text>
+  <text x="350" y="562" fill="#8fb3ad" font-size="12">Piny 2 i 4 (5 V) zostają wolne</text>
+  <g fill="#ff9f43"><circle cx="400" cy="486" r="5"/><circle cx="520" cy="486" r="5"/><circle cx="640" cy="486" r="5"/><circle cx="760" cy="486" r="5"/><circle cx="880" cy="486" r="5"/></g>
+
+  <!-- Pi GND to rail -->
+  <path d="M330 540 H282 V174 H300" fill="none" stroke="#b8c7c4" stroke-width="3"/>
+  <circle cx="300" cy="174" r="5" fill="#b8c7c4"/>
+  <text x="200" y="380" fill="#e1e9e8" font-size="13" font-weight="700">pin 6 (GND)</text>
+  <text x="200" y="398" fill="#8fb3ad" font-size="12">wspólna masa</text>
+
+  <!-- Pi PSU -->
+  <rect x="30" y="520" width="200" height="62" rx="12" fill="#1a2a2d" stroke="#8fb3ad" stroke-width="1.5"/>
+  <text x="46" y="546" fill="#e8f6f3" font-size="14" font-weight="700">Zasilacz Pi USB-C</text>
+  <text x="46" y="566" fill="#8fb3ad" font-size="12">5,1 V 3 A, osobny</text>
+  <line x1="230" y1="560" x2="330" y2="560" stroke="#8fb3ad" stroke-width="3" stroke-dasharray="6 5"/>
+
+  <text x="926" y="133" text-anchor="end" fill="#ffd2cf" font-size="13" font-weight="700" stroke="#5c1f1d" paint-order="stroke" stroke-linejoin="round" stroke-width="5">+5 V</text>
+  <text x="926" y="179" text-anchor="end" fill="#e1e9e8" font-size="13" font-weight="700" stroke="#2b3638" paint-order="stroke" stroke-linejoin="round" stroke-width="5">GND</text>
+  <!-- legend -->
+  <g font-size="12" fill="#c9dcd8">
+    <line x1="30" y1="232" x2="58" y2="232" stroke="#ff6b62" stroke-width="3"/><text x="66" y="236">czerwony: +5 V</text>
+    <line x1="30" y1="256" x2="58" y2="256" stroke="#9b7653" stroke-width="3"/><text x="66" y="260">brązowy/czarny: GND</text>
+    <line x1="30" y1="280" x2="58" y2="280" stroke="#ff9f43" stroke-width="3"/><text x="66" y="284">pomarańczowy/żółty: sygnał</text>
+  </g>
+  <text x="30" y="616" fill="#ff8f87" font-size="13" font-weight="700">Nigdy nie łącz +5 V zasilacza serw z pinami 2/4 Pi i nie zasilaj serw z Pi.</text>
+</svg>

@@ -79,7 +79,13 @@ apt-cache policy pigpio python3-pigpio
 
 Nie kontynuuj kalibracji z założeniem, że to naprawi drgania. Sprawdź GND, styki, przewody i 5 V pod obciążeniem. Testuj pojedyncze serwo bez obciążenia, z pozostałymi fizycznie odłączonymi od zasilania. Odznaczenie checkboxa odłącza sygnał, nie zasilanie.
 
-Możliwe przyczyny to spadki napięcia, słaba wspólna masa, zakłócenia sygnału, mechaniczny opór lub uszkodzone serwo. Stałe wartości w panelu/API wykluczają zmienne zadania tego procesu w danym momencie, ale nie potwierdzają poprawnego przebiegu elektrycznego ani braku innego programu sterującego GPIO.
+Możliwe przyczyny to spadki napięcia, słaba wspólna masa, zakłócenia sygnału, mechaniczny opór lub uszkodzone serwo.
+
+**Jedno serwo „tańczy” kilka sekund po zatrzymaniu, a potem się uspokaja.** Pomiar na prawdziwym robocie pokazał, że program wysyła wtedy idealnie stały impuls — ruch kończy się płynnie, bez cofnięć. To mechanika: luz w plastikowych zębatkach SG90 i ciężar dalszej części ramienia (najczęściej nadgarstek z chwytakiem). Serwo dochodzi do celu, ciężar przechyla je o luz, ono poprawia i przestrzela, aż trafi w punkt równowagi. Sprawdź:
+
+1. Czy przegub nie stoi przy samym MIN/MAX, dociskając do oporu — wtedy zmniejsz zakres o 50–80 µs.
+2. Czy taniec znika, gdy podtrzymasz dalszą część ramienia palcami — wtedy winne jest obciążenie; pomoże serwo z metalowymi zębatkami (MG90S).
+3. Czy problem przechodzi razem z serwem po zamianie go z innym — wtedy serwo jest zużyte. Stałe wartości w panelu/API wykluczają zmienne zadania tego procesu w danym momencie, ale nie potwierdzają poprawnego przebiegu elektrycznego ani braku innego programu sterującego GPIO.
 
 ## Utraciłem połączenie podczas ruchu
 

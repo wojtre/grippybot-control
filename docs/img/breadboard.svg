@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 560" width="980" height="560" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>Rozprowadzenie zasilania serw na szynach płytki stykowej</title>
+  <rect width="980" height="560" rx="18" fill="#0f1a1c"/>
+  <text x="30" y="40" fill="#e8f6f3" font-size="22" font-weight="700">Rozprowadzenie zasilania na płytce stykowej</text>
+  <text x="30" y="64" fill="#8fb3ad" font-size="14">Używamy tylko dwóch szyn zasilania: „+” (czerwona linia) i „−” (niebieska). Środek płytki nie jest potrzebny.</text>
+  <rect x="200" y="96" width="740" height="150" rx="10" fill="#efeee6"/>
+  <line x1="214" y1="116" x2="926" y2="116" stroke="#d63b2f" stroke-width="2"/>
+  <line x1="214" y1="168" x2="926" y2="168" stroke="#2f6fd6" stroke-width="2"/>
+  <text x="208" y="134" fill="#d63b2f" font-size="16" font-weight="700">+</text>
+  <text x="208" y="160" fill="#2f6fd6" font-size="18" font-weight="700">−</text>
+  <rect x="214" y="188" width="712" height="46" rx="4" fill="#e3e1d6"/>
+  <text x="570" y="216" text-anchor="middle" fill="#9a978a" font-size="13">środek płytki — nieużywany</text>
+  <rect x="232.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="246.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="261.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="275.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="290.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="319.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="334.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="348.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="363.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="378.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="407.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="421.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="436.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="451.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="465.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="494.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="509.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="524.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="538.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="553.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="582.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="597.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="611.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="626.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="640.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="670.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="684.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="699.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="713.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="728.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="757.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="772.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="786.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="801.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="816.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="845.2" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="859.8" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="874.4" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="889.0" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="903.6" y="125" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="232.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="246.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="261.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="275.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="290.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="319.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="334.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="348.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="363.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="378.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="407.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="421.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="436.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="451.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="465.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="494.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="509.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="524.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="538.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="553.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="582.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="597.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="611.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="626.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="640.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="670.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="684.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="699.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="713.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="728.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="757.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="772.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="786.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="801.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="816.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="845.2" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="859.8" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="874.4" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="889.0" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="903.6" y="153" width="6" height="6" rx="1" fill="#3a3a36"/>
+  <rect x="30" y="100" width="140" height="92" rx="12" fill="#1a2a2d" stroke="#d9534f" stroke-width="2"/>
+  <text x="44" y="126" fill="#e8f6f3" font-size="15" font-weight="700">Zasilacz serw</text>
+  <text x="44" y="146" fill="#c9dcd8" font-size="13">5 V DC, min. 3 A</text>
+  <text x="44" y="166" fill="#8fb3ad" font-size="12">przejściówka DC →</text>
+  <text x="44" y="182" fill="#8fb3ad" font-size="12">zaciski śrubowe</text>
+  <path d="M170 124 H235 V131" fill="none" stroke="#ff6b62" stroke-width="4"/>
+  <path d="M170 172 H250 V159" fill="none" stroke="#5aa0ff" stroke-width="4"/>
+  <line x1="320" y1="131" x2="320" y2="300" stroke="#ff6b62" stroke-width="3"/>
+  <circle cx="320" cy="131" r="5" fill="#ff6b62"/>
+  <line x1="338" y1="159" x2="338" y2="300" stroke="#9b7653" stroke-width="3"/>
+  <circle cx="338" cy="159" r="5" fill="#5aa0ff"/>
+  <line x1="356" y1="318" x2="356" y2="300" stroke="#ff9f43" stroke-width="3"/>
+  <rect x="308" y="300" width="60" height="22" rx="4" fill="#222"/>
+  <circle cx="320" cy="311" r="4" fill="#ff6b62"/><circle cx="338" cy="311" r="4" fill="#9b7653"/><circle cx="356" cy="311" r="4" fill="#ff9f43"/>
+  <rect x="290" y="336" width="96" height="44" rx="8" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+  <text x="338" y="356" text-anchor="middle" fill="#65f5da" font-size="13" font-weight="700">S1</text>
+  <text x="338" y="372" text-anchor="middle" fill="#e8f6f3" font-size="12">podstawa</text>
+  <line x1="356" y1="322" x2="356" y2="336" stroke="#ff9f43" stroke-width="3"/>
+  <path d="M376 311 h12 V470" fill="none" stroke="#ff9f43" stroke-width="3"/>
+  <text x="406" y="452" fill="#ffc48a" font-size="11" font-family="ui-monospace, Menlo, monospace" transform="rotate(-90 406 452)">GPIO17 · pin 11</text>
+  <circle cx="388" cy="470" r="5" fill="#ff9f43"/>
+  <line x1="440" y1="131" x2="440" y2="300" stroke="#ff6b62" stroke-width="3"/>
+  <circle cx="440" cy="131" r="5" fill="#ff6b62"/>
+  <line x1="458" y1="159" x2="458" y2="300" stroke="#9b7653" stroke-width="3"/>
+  <circle cx="458" cy="159" r="5" fill="#5aa0ff"/>
+  <line x1="476" y1="318" x2="476" y2="300" stroke="#ff9f43" stroke-width="3"/>
+  <rect x="428" y="300" width="60" height="22" rx="4" fill="#222"/>
+  <circle cx="440" cy="311" r="4" fill="#ff6b62"/><circle cx="458" cy="311" r="4" fill="#9b7653"/><circle cx="476" cy="311" r="4" fill="#ff9f43"/>
+  <rect x="410" y="336" width="96" height="44" rx="8" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+  <text x="458" y="356" text-anchor="middle" fill="#65f5da" font-size="13" font-weight="700">S2</text>
+  <text x="458" y="372" text-anchor="middle" fill="#e8f6f3" font-size="12">bark</text>
+  <line x1="476" y1="322" x2="476" y2="336" stroke="#ff9f43" stroke-width="3"/>
+  <path d="M496 311 h12 V470" fill="none" stroke="#ff9f43" stroke-width="3"/>
+  <text x="526" y="452" fill="#ffc48a" font-size="11" font-family="ui-monospace, Menlo, monospace" transform="rotate(-90 526 452)">GPIO27 · pin 13</text>
+  <circle cx="508" cy="470" r="5" fill="#ff9f43"/>
+  <line x1="560" y1="131" x2="560" y2="300" stroke="#ff6b62" stroke-width="3"/>
+  <circle cx="560" cy="131" r="5" fill="#ff6b62"/>
+  <line x1="578" y1="159" x2="578" y2="300" stroke="#9b7653" stroke-width="3"/>
+  <circle cx="578" cy="159" r="5" fill="#5aa0ff"/>
+  <line x1="596" y1="318" x2="596" y2="300" stroke="#ff9f43" stroke-width="3"/>
+  <rect x="548" y="300" width="60" height="22" rx="4" fill="#222"/>
+  <circle cx="560" cy="311" r="4" fill="#ff6b62"/><circle cx="578" cy="311" r="4" fill="#9b7653"/><circle cx="596" cy="311" r="4" fill="#ff9f43"/>
+  <rect x="530" y="336" width="96" height="44" rx="8" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+  <text x="578" y="356" text-anchor="middle" fill="#65f5da" font-size="13" font-weight="700">S3</text>
+  <text x="578" y="372" text-anchor="middle" fill="#e8f6f3" font-size="12">łokieć</text>
+  <line x1="596" y1="322" x2="596" y2="336" stroke="#ff9f43" stroke-width="3"/>
+  <path d="M616 311 h12 V470" fill="none" stroke="#ff9f43" stroke-width="3"/>
+  <text x="646" y="452" fill="#ffc48a" font-size="11" font-family="ui-monospace, Menlo, monospace" transform="rotate(-90 646 452)">GPIO22 · pin 15</text>
+  <circle cx="628" cy="470" r="5" fill="#ff9f43"/>
+  <line x1="680" y1="131" x2="680" y2="300" stroke="#ff6b62" stroke-width="3"/>
+  <circle cx="680" cy="131" r="5" fill="#ff6b62"/>
+  <line x1="698" y1="159" x2="698" y2="300" stroke="#9b7653" stroke-width="3"/>
+  <circle cx="698" cy="159" r="5" fill="#5aa0ff"/>
+  <line x1="716" y1="318" x2="716" y2="300" stroke="#ff9f43" stroke-width="3"/>
+  <rect x="668" y="300" width="60" height="22" rx="4" fill="#222"/>
+  <circle cx="680" cy="311" r="4" fill="#ff6b62"/><circle cx="698" cy="311" r="4" fill="#9b7653"/><circle cx="716" cy="311" r="4" fill="#ff9f43"/>
+  <rect x="650" y="336" width="96" height="44" rx="8" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+  <text x="698" y="356" text-anchor="middle" fill="#65f5da" font-size="13" font-weight="700">S4</text>
+  <text x="698" y="372" text-anchor="middle" fill="#e8f6f3" font-size="12">nadgarstek</text>
+  <line x1="716" y1="322" x2="716" y2="336" stroke="#ff9f43" stroke-width="3"/>
+  <path d="M736 311 h12 V470" fill="none" stroke="#ff9f43" stroke-width="3"/>
+  <text x="766" y="452" fill="#ffc48a" font-size="11" font-family="ui-monospace, Menlo, monospace" transform="rotate(-90 766 452)">GPIO23 · pin 16</text>
+  <circle cx="748" cy="470" r="5" fill="#ff9f43"/>
+  <line x1="800" y1="131" x2="800" y2="300" stroke="#ff6b62" stroke-width="3"/>
+  <circle cx="800" cy="131" r="5" fill="#ff6b62"/>
+  <line x1="818" y1="159" x2="818" y2="300" stroke="#9b7653" stroke-width="3"/>
+  <circle cx="818" cy="159" r="5" fill="#5aa0ff"/>
+  <line x1="836" y1="318" x2="836" y2="300" stroke="#ff9f43" stroke-width="3"/>
+  <rect x="788" y="300" width="60" height="22" rx="4" fill="#222"/>
+  <circle cx="800" cy="311" r="4" fill="#ff6b62"/><circle cx="818" cy="311" r="4" fill="#9b7653"/><circle cx="836" cy="311" r="4" fill="#ff9f43"/>
+  <rect x="770" y="336" width="96" height="44" rx="8" fill="#16353a" stroke="#65f5da" stroke-width="2"/>
+  <text x="818" y="356" text-anchor="middle" fill="#65f5da" font-size="13" font-weight="700">S5</text>
+  <text x="818" y="372" text-anchor="middle" fill="#e8f6f3" font-size="12">chwytak</text>
+  <line x1="836" y1="322" x2="836" y2="336" stroke="#ff9f43" stroke-width="3"/>
+  <path d="M856 311 h12 V470" fill="none" stroke="#ff9f43" stroke-width="3"/>
+  <text x="886" y="452" fill="#ffc48a" font-size="11" font-family="ui-monospace, Menlo, monospace" transform="rotate(-90 886 452)">GPIO24 · pin 18</text>
+  <circle cx="868" cy="470" r="5" fill="#ff9f43"/>
+  <rect x="300" y="470" width="640" height="60" rx="12" fill="#1a2a2d" stroke="#65f5da" stroke-width="2"/>
+  <text x="320" y="497" fill="#e8f6f3" font-size="15" font-weight="700">Raspberry Pi 4 — złącze GPIO</text>
+  <text x="320" y="517" fill="#8fb3ad" font-size="12">przewody żeńsko-męskie (Dupont) prosto na piny</text>
+  <path d="M300 500 H262 V159" fill="none" stroke="#b8c7c4" stroke-width="3"/>
+  <circle cx="262" cy="159" r="5" fill="#5aa0ff"/>
+  <text x="30" y="330" fill="#e1e9e8" font-size="13" font-weight="700">Pi pin 6 (GND)</text>
+  <text x="30" y="348" fill="#8fb3ad" font-size="12">→ szyna „−”</text>
+  <text x="30" y="378" fill="#8fb3ad" font-size="12">wspólna masa jest</text>
+  <text x="30" y="394" fill="#8fb3ad" font-size="12">obowiązkowa</text>
+  <g font-size="12" fill="#c9dcd8">
+    <text x="30" y="250">Wtyczka SG90:</text>
+    <circle cx="36" cy="268" r="4" fill="#ff6b62"/><text x="46" y="272">czerwony → +</text>
+    <circle cx="36" cy="286" r="4" fill="#9b7653"/><text x="46" y="290">brązowy → −</text>
+    <circle cx="36" cy="304" r="4" fill="#ff9f43"/><text x="46" y="308">sygnał → GPIO</text>
+  </g>
+  <text x="30" y="550" fill="#8fb3ad" font-size="12">Szyny długich płytek bywają przerwane w połowie — wtedy połącz obie połowy krótkim przewodem. Zasilanie wprowadzaj krótkim, grubszym przewodem.</text>
+</svg>
