@@ -3,17 +3,20 @@
 import argparse
 import fcntl
 import json
+import mimetypes
 from pathlib import Path
 import secrets
 import signal
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from socketserver import TCPServer
+from urllib.parse import urlsplit, unquote
 
 from .config import load_joints
 from .controller import Controller
 from .simulation import SimulatedPi
 
 PAGE = Path(__file__).with_name("panel.html")
+STATIC = PAGE.parent / "static"
 
 
 class LocalHTTPServer(ThreadingHTTPServer):
@@ -50,6 +53,29 @@ def make_server(controller, port=8765, simulation=False, token=None):
         def do_GET(self):
             if self.path == "/api/state":
                 return self.reply(200, self.state())
+            if self.path == "/api/vision":
+                from .prepare_vision import assets_ready
+                return self.reply(200, {"ready": assets_ready(), "version": "0.10.21"})
+            path = unquote(urlsplit(self.path).path)
+            if path.startswith("/static/"):
+                root = STATIC.resolve()
+                asset = (root / path[len("/static/"):]).resolve()
+                if not asset.is_relative_to(root) or not asset.is_file():
+                    return self.reply(404, {"error": "Brak pliku panelu lub modeli."})
+                content_type = {
+                    ".mjs": "text/javascript", ".js": "text/javascript",
+                    ".wasm": "application/wasm", ".task": "application/octet-stream",
+                }.get(asset.suffix, mimetypes.guess_type(asset.name)[0] or "application/octet-stream")
+                self.send_response(200)
+                self.send_header("Content-Type", content_type)
+                self.send_header("Content-Length", str(asset.stat().st_size))
+                self.send_header("X-Content-Type-Options", "nosniff")
+                self.send_header("Cache-Control", "no-cache")
+                self.end_headers()
+                with asset.open("rb") as source:
+                    import shutil
+                    shutil.copyfileobj(source, self.wfile)
+                return
             if self.path != "/":
                 return self.reply(404, {"error": "Nie znaleziono."})
             raw = PAGE.read_text(encoding="utf-8").replace("__TOKEN__", token).encode()

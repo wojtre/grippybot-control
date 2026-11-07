@@ -22,4 +22,4 @@ grippy-control = "grippy_control.server:main"
 include = ["grippy_control*"]
 
 [tool.setuptools.package-data]
-grippy_control = ["panel.html"]
+grippy_control = ["panel.html", "vision-assets.json", "static/*.mjs", "static/*.css", "static/vendor/*", "static/vendor/wasm/*"]

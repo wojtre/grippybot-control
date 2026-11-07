@@ -1,9 +1,12 @@
 """Servo commands, coalesced live targets and local pulse-width calibration."""
 
 import json
+import math
 import os
 from pathlib import Path
+import secrets
 import threading
+import time
 
 from .config import DEFAULT_JOINTS
 
@@ -20,6 +23,9 @@ class Controller:
         self.stopping = False
         self.following = False
         self.follow_targets = {}
+        self.gesture = None
+        self.control_epoch = 0
+        self.gesture_reason = "Podgląd"
         self.suppressed = set()
         self.speed = 250
         self.error = ""
@@ -61,6 +67,12 @@ class Controller:
                 "following": self.following,
                 "speed": self.speed,
                 "error": self.error,
+                "gesture": {
+                    "session": self.gesture["session"] if self.gesture else None,
+                    "epoch": self.control_epoch,
+                    "reason": self.gesture_reason,
+                    "timeout_ms": 400,
+                },
                 "joints": [
                     {
                         "id": s,
@@ -133,8 +145,102 @@ class Controller:
                 self.busy = False
             self.lock.release()
 
+    def _pause_gesture(self, reason):
+        """Caller holds state_lock. Freeze at the last emitted pulse, not target."""
+        if self.gesture is not None:
+            self.gesture = None
+            self.follow_targets.clear()
+            self.control_epoch += 1
+            self.gesture_reason = reason
+
+    @staticmethod
+    def _frame(data):
+        frame, age = data.get("frame"), data.get("age_ms")
+        if (
+            type(frame) not in (int, float)
+            or (type(frame) is float and not math.isfinite(frame))
+            or frame < 0
+            or type(age) not in (int, float)
+            or not 0 <= age <= 250
+        ):
+            raise ValueError("Nieaktualna klatka kamery.")
+        return frame, age
+
+    def _gesture_command(self, action, data):
+        with self.state_lock:
+            if action in ("gesture_pause", "gesture_end"):
+                # A delayed pause from an older session cannot stop its successor.
+                if self.gesture and data.get("session") == self.gesture["session"]:
+                    self._pause_gesture("Pauza — pozycja podtrzymywana")
+                return
+            if self.stopping:
+                raise ValueError("Trwa STOP.")
+            if self.gesture and time.monotonic() >= self.gesture["deadline"]:
+                self._pause_gesture("Utrata aktualizacji — otwórz dłoń zezwalającą")
+            if action == "gesture_start":
+                ids = data.get("ids")
+                if type(data.get("epoch")) is not int or data["epoch"] != self.control_epoch:
+                    raise ValueError("Nieaktualna sesja. Otwórz dłoń zezwalającą.")
+                if (
+                    not isinstance(ids, list)
+                    or not ids
+                    or any(type(s) is not str or s not in self.joints for s in ids)
+                    or len(set(ids)) != len(ids)
+                ):
+                    raise ValueError("Wybierz poprawne serwa.")
+                if any(self.position[s] is None or s in self.suppressed for s in ids):
+                    raise ValueError("Najpierw jawnie włącz wybrane serwa w trybie na żywo.")
+                frame, age = self._frame(data)
+                if not self.lock.acquire(blocking=False):
+                    raise ValueError("Poczekaj na zakończenie ruchu.")
+                self.gesture = {
+                    "session": secrets.token_urlsafe(24),
+                    "ids": set(ids),
+                    "seq": 0,
+                    "frame": frame,
+                    "deadline": time.monotonic() + (400 - age) / 1000,
+                }
+                self.gesture_reason = "Aktywne"
+                self.follow_targets = {s: self.position[s] for s in ids}
+                self.following = self.busy = True
+                self.error = ""
+                self.cancel.clear()
+                threading.Thread(target=self._follow_work, daemon=True).start()
+                return
+            if not self.gesture or data.get("session") != self.gesture["session"]:
+                raise ValueError("Sesja gestów wygasła. Otwórz dłoń zezwalającą.")
+            try:
+                frame, age = self._frame(data)
+                seq = data.get("seq")
+                if (
+                    type(seq) is not int
+                    or seq <= self.gesture["seq"]
+                    or frame <= self.gesture["frame"]
+                ):
+                    raise ValueError("Nieaktualna kolejność klatek.")
+                values = data.get("targets")
+                if not isinstance(values, dict) or set(values) != self.gesture["ids"]:
+                    raise ValueError("Niepełna pozycja gestów.")
+                for s, v in values.items():
+                    if (
+                        type(v) is not int
+                        or not self.bounds[s]["min"] <= v <= self.bounds[s]["max"]
+                    ):
+                        raise ValueError("Pozycja poza zakresem " + s)
+                    if self.position[s] is None:
+                        raise ValueError("Sygnał serwa jest wyłączony.")
+            except ValueError:
+                self._pause_gesture("Niepoprawna aktualizacja — pauza")
+                raise
+            self.follow_targets = dict(values)
+            self.gesture.update(
+                seq=seq, frame=frame, deadline=time.monotonic() + (400 - age) / 1000
+            )
+
     def command(self, data):
         action = data.get("action")
+        if action in ("gesture_start", "gesture_follow", "gesture_pause", "gesture_end"):
+            return self._gesture_command(action, data)
         if action == "speed":
             value = data.get("value")
             if type(value) is not int or value not in (125, 250, 500, 1000, 2000, 4000):
@@ -151,6 +257,7 @@ class Controller:
             ):
                 raise ValueError("Wybierz poprawne serwa.")
             with self.state_lock:
+                self._pause_gesture("Wyłączono przegub")
                 for s in ids:
                     self.suppressed.add(s)
                     self.follow_targets.pop(s, None)
@@ -162,6 +269,8 @@ class Controller:
             with self.state_lock:
                 if self.stopping:
                     raise ValueError("Trwa STOP.")
+                if self.gesture:
+                    raise ValueError("Najpierw zakończ sterowanie gestami.")
                 values = data.get("targets")
                 if (
                     not isinstance(values, dict)
@@ -191,6 +300,10 @@ class Controller:
             # STOP takes priority over any new movement request.
             with self.state_lock:
                 self.stopping = True
+                self._pause_gesture("STOP — sygnały wyłączone")
+                # Invalidate starts which were sent before STOP, even while idle.
+                self.control_epoch += 1
+                self.gesture_reason = "STOP — sygnały wyłączone"
                 self.cancel.set()
             try:
                 with self.lock:
@@ -294,12 +407,14 @@ class Controller:
         try:
             while not self.cancel.is_set():
                 with self.state_lock:
+                    if self.gesture and time.monotonic() >= self.gesture["deadline"]:
+                        self._pause_gesture("Utrata aktualizacji — otwórz dłoń zezwalającą")
                     pending = {
                         s: v
                         for s, v in self.follow_targets.items()
                         if self.position[s] != v
                     }
-                    if not pending:
+                    if not pending and self.gesture is None:
                         self.following = False
                         self.busy = False
                         self.lock.release()
@@ -317,7 +432,7 @@ class Controller:
                     break
                 # Exit/release happens under the same lock as a target update.
                 with self.state_lock:
-                    if all(
+                    if self.gesture is None and all(
                         self.position[s] == v for s, v in self.follow_targets.items()
                     ):
                         self.following = False
@@ -327,6 +442,7 @@ class Controller:
                         return
         except Exception as exc:
             with self.state_lock:
+                self._pause_gesture("Błąd sterownika")
                 self.error = str(exc)
             for s in self.joints:
                 if self.position[s] is not None:

@@ -126,3 +126,27 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(json.loads(body)["speed"], 4000)
         self.assertEqual(self.pi.calls, [])
+
+    def test_gesture_assets_and_status_are_read_only(self):
+        for path in ("/static/gestures.mjs", "/static/gesture-core.mjs",
+                     "/static/gesture-worker.mjs", "/static/gestures.css", "/api/vision"):
+            with self.subTest(path=path):
+                status, raw = self.request("GET", path)
+                self.assertEqual(status, 200)
+                self.assertTrue(raw)
+        self.assertEqual(self.pi.calls, [])
+
+    def test_static_paths_cannot_escape_asset_directory(self):
+        for path in ("/static/../controller.py", "/static/%2e%2e/server.py",
+                     "/static/%2fetc/passwd", "/static/", "/static/missing.js"):
+            with self.subTest(path=path):
+                status, _ = self.request("GET", path)
+                self.assertEqual(status, 404)
+        self.assertEqual(self.pi.calls, [])
+
+    def test_gesture_api_requires_token_and_does_not_enable_servos(self):
+        body = json.dumps({"action": "gesture_start", "ids": ["S1"],
+                           "epoch": 0, "frame": 1, "age_ms": 0})
+        self.assertEqual(self.request("POST", "/api/command", body)[0], 403)
+        self.assertEqual(self.request("POST", "/api/command", body, "test-only")[0], 400)
+        self.assertEqual(self.pi.calls, [])

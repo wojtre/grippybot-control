@@ -14,6 +14,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m unittest discover -s tests -v
+      - run: node --test tests/*.test.mjs
       - run: python -m grippy_control --config config.example.json --check-config
       - run: python -m compileall -q grippy_control scripts
       - run: bash -n scripts/install-pi.sh scripts/connect.sh

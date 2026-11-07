@@ -1,14 +1,15 @@
 # Grippy Bot Control — Smart Wojtech Lab
 
-Steruj wydrukowanym ramieniem Grippy Bot z przeglądarki: przeciągaj przeguby na schemacie 2D, ustawiaj prędkość i kalibruj serwa. Panel działa na Raspberry Pi, a otwierasz go na swoim komputerze przez SSH.
+Steruj wydrukowanym ramieniem Grippy Bot z przeglądarki: **ruchami własnej ręki przed kamerą** albo przeciągając przeguby na schemacie 2D. Panel działa na Raspberry Pi, a otwierasz go na swoim komputerze przez SSH. Rozpoznawanie dłoni działa lokalnie w przeglądarce — obraz z kamery nigdzie nie jest wysyłany.
 
 Projekt dla osób budujących pierwszego robota. Instrukcja jest po polsku. Nie potrzebujesz aplikacji mobilnej, konta w chmurze, Node.js ani płatnego API.
 
-![Panel w trybie demonstracyjnym, bez podłączonego robota](docs/panel-demo.png)
+![Sterowanie gestami: lewa pięść zezwala na ruch, prawe ramię prowadzi robota (tryb demo, bez kamery)](docs/gesture-demo.png)
 
 ## Co znajdziesz w repozytorium
 
-- Panel do sterowania robotem na żywo i kalibracji serw.
+- Sterowanie gestami z kamery komputera: lewa pięść włącza ruch, prawe ramię prowadzi przeguby, prawa dłoń otwiera i zamyka chwytak.
+- Panel do sterowania przeciąganiem i kalibracji serw.
 - Instrukcję instalacji na Raspberry Pi.
 - Instrukcje podłączenia, połączenia przez SSH i uruchamiania panelu.
 - Skill do instalacji i konfiguracji z pomocą Codex lub Claude Code.
@@ -40,6 +41,28 @@ python3 -m grippy_control --simulate
 Otwórz **http://127.0.0.1:8765**. Wskaźnik `DEMO` oznacza, że nic nie jest podłączone do sprzętu. Możesz przeciągać ramię i sprawdzić checkboxy. `Ctrl+C` w terminalu zamyka demonstrację. Tryb demo nie wymaga biblioteki pigpio.
 
 Jeżeli port jest zajęty, dodaj `--port 8766` i otwórz http://127.0.0.1:8766.
+
+### Wypróbuj sterowanie gestami
+
+W katalogu projektu pobierz raz modele rozpoznawania:
+
+```bash
+python3 -m grippy_control.prepare_vision
+```
+
+W działającym panelu wybierz **Gesty → Włącz kamerę**. Domyślnie:
+
+- **Lewa ręka:** zaciśnij pięść i przytrzymaj chwilę — robot zaczyna podążać. Otwarta lewa dłoń od razu pauzuje z zachowaniem pozycji i chwytu.
+- **Prawa ręka:** bark, łokieć i nadgarstek prowadzą przeguby S1–S4. Otwarta dłoń otwiera chwytak, pięść go zamyka.
+
+Bez włączenia trybu na żywo porusza się tylko schemat. Analiza obrazu działa
+lokalnie w przeglądarce. [Instrukcja, kalibracja i przygotowanie na Pi](docs/gestures.md).
+
+![Obrazkowa instrukcja obu rąk przed uruchomieniem kamery](docs/gesture-start.png)
+
+Zakładka **Przeciąganie** pozwala ustawić każdy przegub myszą i skalibrować serwa:
+
+![Panel w trybie przeciągania, demo bez podłączonego robota](docs/panel-demo.png)
 
 ## 2. Co przygotować do prawdziwego robota
 
@@ -186,6 +209,6 @@ Poczekaj na zakończenie zamykania, zanim odłączysz Pi od prądu. Samo zamkni�
 
 ## Status, autorzy i licencja
 
-Panel powstał w Smart Wojtech Lab z pomocą Codex. Sterowanie fizycznego prototypu sprawdzono na Pi 4 / Bookworm. Publiczna wersja uogólnia ścieżki, konfigurację i instalację; testy automatyczne działają na symulowanych serwach. Nie przeprowadzono jeszcze instalacji na czystej karcie SD przez niezależnego widza.
+Panel powstał w Smart Wojtech Lab z pomocą Codex i Claude Code. Sterowanie fizycznego prototypu sprawdzono na Pi 4 / Bookworm. Publiczna wersja uogólnia ścieżki, konfigurację i instalację; testy automatyczne działają na symulowanych serwach. Nie przeprowadzono jeszcze instalacji na czystej karcie SD przez niezależnego widza.
 
 Kod tego repozytorium: [MIT](LICENSE). Mechanika Grippy Bot jest projektem [Roboteurs](https://cults3d.com/en/3d-model/gadget/grippy-bot). Biblioteka [pigpio](https://github.com/joan2937/pigpio) jest niezależną zależnością. Licencja tego panelu nie zmienia licencji cudzych modeli, zdjęć ani kodu.

@@ -11,5 +11,6 @@ data-sim/
 *.pid
 .DS_Store
 .env
+grippy_control/static/vendor/
 .agents/skills/
 .claude/skills/
